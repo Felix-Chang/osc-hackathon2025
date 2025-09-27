@@ -5,7 +5,7 @@ A fast prototype built during Open Source Hackathon 2025. Clone the repo, create
 
 ### 1) Clone and enter
 ```bash
-git clone https://github.com/Felix-Chang/osc-hackathon2025.git
+git clone --branch spinemoment --single-branch https://github.com/Felix-Chang/osc-hackathon2025.git
 cd osc-hackathon2025
 ```
 
@@ -13,27 +13,27 @@ cd osc-hackathon2025
 
 **Windows (CMD)**
 ```cmd
-python -m venv venv
+python -3.11 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 **Windows (PowerShell)**
 ```powershell
-python -m venv venv
+python -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
 **macOS / Linux**
 ```bash
-python3 -m venv .venv
+python3 -3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ### 3) Run (example)
 ```bash
-python app.py
+python getdata.py
 # or: python -m src.main
 ```

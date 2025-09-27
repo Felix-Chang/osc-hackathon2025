@@ -49,7 +49,7 @@ with mp_pose.Pose(
         # --- ENHANCED POSTURE CHECK ---
         # Check 1: Head alignment (ear vs shoulder) - forward head posture
         head_slouching_left = left_ear.x < left_shoulder.x - SLOUCH_THRESHOLD
-        head_slouching_right = right_ear.x < right_shoulder.x - SLOUCH_THRESHOLD
+        head_slouching_right = right_ear.x > right_shoulder.x - SLOUCH_THRESHOLD
         
         # Check 2: Spine straightness (shoulder to hip alignment)
         # Calculate the vertical alignment of spine
