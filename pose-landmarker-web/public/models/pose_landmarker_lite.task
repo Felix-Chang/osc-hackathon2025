@@ -1,0 +1,5 @@
+# Placeholder for pose_landmarker_lite.task
+# Download the actual model file from MediaPipe Model Zoo:
+# https://developers.google.com/mediapipe/solutions/vision/pose_landmarker#models
+# 
+# Place the downloaded .task file here and remove this placeholder.

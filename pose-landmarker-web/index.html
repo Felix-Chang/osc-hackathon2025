@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pose Landmarker Web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="wrap">
+    <!-- Top toolbar -->
+    <div class="toolbar">
+      <button id="enable">Enable Webcam</button>
+      <select id="modelVariant">
+        <option value="lite">Lite</option>
+        <option value="full">Full</option>
+        <option value="heavy">Heavy</option>
+      </select>
+      <div id="fps">FPS: --</div>
+    </div>
+
+    <!-- Video and canvas container -->
+    <div class="video-container">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
