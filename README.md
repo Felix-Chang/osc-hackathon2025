@@ -9,25 +9,25 @@ git clone https://github.com/Felix-Chang/osc-hackathon2025.git
 cd osc-hackathon2025
 ```
 
-### 2) Create & activate a virtual environment
+### 2) Install the right Python version, then create & activate a virtual environment
 
 **Windows (CMD)**
 ```cmd
-python -m venv venv
+py -3.11 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 **Windows (PowerShell)**
 ```powershell
-python -m venv venv
+py -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
 **macOS / Linux**
 ```bash
-python3 -m venv .venv
+py -3.11 -m venv venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
