@@ -9,7 +9,13 @@ git clone https://github.com/Felix-Chang/osc-hackathon2025.git
 cd osc-hackathon2025
 ```
 
-### 2) Install the right Python version, then create & activate a virtual environment
+### 2) Download the 3.11.0 version of Python for your device (macOS/Windows)
+
+```
+https://www.python.org/downloads/release/python-3110/
+```
+
+### 3) Install the right Python version, then create & activate a virtual environment
 
 **Windows (CMD)**
 ```cmd
