@@ -1,5 +1,7 @@
-# osc-hackathon2025
-A fast prototype built during Open Source Hackathon 2025. Clone the repo, create a virtual environment, and install dependencies to reproduce our setup.
+# osc-hackathon2025 
+A fast prototype built during the UF Open Source Club Hackathon 2025. Clone the repo, create a virtual environment, and install dependencies to reproduce our setup.
+
+## PosturePal
 
 ## Quick Start
 
@@ -15,7 +17,7 @@ cd osc-hackathon2025
 https://www.python.org/downloads/release/python-3110/
 ```
 
-### 3) Install the right Python version, then create & activate a virtual environment
+### 3) Create & activate a virtual environment using the 3.11.0 Python version
 
 **Windows (CMD)**
 ```cmd
@@ -39,7 +41,7 @@ pip install -r requirements.txt
 ```
 
 ### 3) Run (example)
-```bash
-python app.py
+```
+python getdata.py
 # or: python -m src.main
 ```
