@@ -5,7 +5,7 @@ A fast prototype built during Open Source Hackathon 2025. Clone the repo, create
 
 ### 1) Clone and enter
 ```bash
-git clone --branch spinemoment --single-branch https://github.com/Felix-Chang/osc-hackathon2025.git
+git clone --branch blankFrontend --single-branch https://github.com/Felix-Chang/osc-hackathon2025.git
 cd osc-hackathon2025
 ```
 
