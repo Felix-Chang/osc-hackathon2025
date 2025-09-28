@@ -13,14 +13,14 @@ cd osc-hackathon2025
 
 **Windows (CMD)**
 ```cmd
-python -3.11 -m venv venv
+py -3.11 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 **Windows (PowerShell)**
 ```powershell
-python -3.11 -m venv venv
+py -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
