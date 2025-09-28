@@ -38,7 +38,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3) Run (example)
+### 4) Run (example)
+```bash
+python getdata.py
+# or: python -m src.main
+=======
 ```
 python getdata.py
 ```
