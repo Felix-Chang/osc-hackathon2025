@@ -1,4 +1,4 @@
-# PosturePal — osc-hackathon2025 
+# PosturePal — OSC Hackathon 2025 
 A fast prototype built during the UF Open Source Club Hackathon 2025. Clone the repo, create a virtual environment, and install dependencies to reproduce our setup.
 
 ## Quick Start
