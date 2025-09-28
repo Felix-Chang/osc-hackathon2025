@@ -9,7 +9,7 @@ mp_pose = mp.solutions.pose
 
 cap = cv2.VideoCapture(0)
 # Define thresholds for posture detection
-SLOUCH_THRESHOLD = 0.08 # Threshold for head forward position
+SLOUCH_THRESHOLD = 0.1 # Threshold for head forward position
 SPINE_STRAIGHTNESS_THRESHOLD = 0.11 # Threshold for spine alignment
 
 with mp_pose.Pose(
@@ -48,8 +48,11 @@ with mp_pose.Pose(
 
         # --- ENHANCED POSTURE CHECK ---
         # Check 1: Head alignment (ear vs shoulder) - forward head posture
-        head_slouching_left = left_ear.x < left_shoulder.x - SLOUCH_THRESHOLD
-        head_slouching_right = right_ear.x > right_shoulder.x - SLOUCH_THRESHOLD
+        #head_slouching_left = left_ear.x < left_shoulder.x - SLOUCH_THRESHOLD
+        #head_slouching_right = right_ear.x > right_shoulder.x - SLOUCH_THRESHOLD
+        left_neck_straightness = abs(left_ear.x - left_shoulder.x)
+        right_neck_straightness = abs(right_ear.x - right_shoulder.x)
+
         
         # Check 2: Spine straightness (shoulder to hip alignment)
         # Calculate the vertical alignment of spine
@@ -61,7 +64,7 @@ with mp_pose.Pose(
         shoulder_height_diff = abs(left_shoulder.y - right_shoulder.y)
         
         # Determine posture status using both methods
-        if (head_slouching_left or head_slouching_right or 
+        if ((left_neck_straightness > SLOUCH_THRESHOLD )or (right_neck_straightness > SLOUCH_THRESHOLD) or
             spine_straightness > SPINE_STRAIGHTNESS_THRESHOLD or 
             shoulder_height_diff > 0.05):
             posture_status = 'Slouching Detected!'
@@ -89,47 +92,19 @@ with mp_pose.Pose(
     # Flip the image horizontally for a selfie-view display
     flipped_image = cv2.flip(image, 1)
     
-    # Add the text to the flipped image so it appears correctly oriented
-    try:
-        # Get the landmarks again for the flipped image
-        landmarks = results.pose_landmarks.landmark
-        left_shoulder = landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER]
-        right_shoulder = landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER]
-        left_ear = landmarks[mp_pose.PoseLandmark.LEFT_EAR]
-        right_ear = landmarks[mp_pose.PoseLandmark.RIGHT_EAR]
-        left_hip = landmarks[mp_pose.PoseLandmark.LEFT_HIP]
-        right_hip = landmarks[mp_pose.PoseLandmark.RIGHT_HIP]
-
-        # --- ENHANCED POSTURE CHECK ---
-        # Check 1: Head alignment (ear vs shoulder) - forward head posture
-        head_slouching_left = left_ear.x < left_shoulder.x - SLOUCH_THRESHOLD
-        head_slouching_right = right_ear.x < right_shoulder.x - SLOUCH_THRESHOLD
-        
-        # Check 2: Spine straightness (shoulder to hip alignment)
-        left_spine_alignment = abs(left_shoulder.x - left_hip.x)
-        right_spine_alignment = abs(right_shoulder.x - right_hip.x)
-        spine_straightness = (left_spine_alignment + right_spine_alignment) / 2
-        
-        # Check 3: Shoulder level (both shoulders should be roughly at same height)
-        shoulder_height_diff = abs(left_shoulder.y - right_shoulder.y)
-        
-        # Determine posture status using both methods
-        if (head_slouching_left or head_slouching_right or 
-            spine_straightness > SPINE_STRAIGHTNESS_THRESHOLD or 
-            shoulder_height_diff > 0.05):
-            posture_status = 'Slouching Detected!'
-            text_color = (0, 0, 255) # Red for bad posture
-        else:
-            posture_status = 'Good Posture'
-            text_color = (0, 255, 0) # Green for good posture
-        
+   
         # Display the posture status on the flipped image
-        cv2.putText(flipped_image, posture_status, 
-                    (10, 30), # Position of the text
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
-    except:
-        pass
-    
+    cv2.putText(flipped_image, posture_status, 
+                (10, 30), # Position of the text
+                cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
+
+    cv2.putText(flipped_image, "left neck "+ str(round(left_neck_straightness,3)), (10,80), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right neck "+ str(round(right_neck_straightness,3)), (10,120), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "left spine "+ str(round(left_spine_alignment,3)), (10,160), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right spine "+ str(round(right_spine_alignment,3)), (10,200), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+   
+
+
     cv2.imshow('MediaPipe Pose', flipped_image)
 
     if cv2.waitKey(5) & 0xFF == 27:
