@@ -155,13 +155,13 @@ with mp_pose.Pose(
         # Display the posture status on the flipped image
     cv2.putText(flipped_image, posture_status, 
                 (10, 30), # Position of the text
-                cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
+                cv2.FONT_HERSHEY_SIMPLEX, 0.75, text_color, 1, cv2.LINE_AA)
     # Testing purposes
 
-    cv2.putText(flipped_image, "left neck "+ str(round(left_neck_alignment,3)), (10,80), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-    cv2.putText(flipped_image, "right neck "+ str(round(right_neck_alignment,3)), (10,120), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-    cv2.putText(flipped_image, "left spine "+ str(round(left_spine_alignment,3)), (10,160), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-    cv2.putText(flipped_image, "right spine "+ str(round(right_spine_alignment,3)), (10,200), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "left neck "+ str(round(left_neck_alignment,3)), (10,80), cv2.FONT_HERSHEY_SIMPLEX,0.75,text_color, 1, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right neck "+ str(round(right_neck_alignment,3)), (10,120), cv2.FONT_HERSHEY_SIMPLEX,0.75,text_color, 1, cv2.LINE_AA)
+    cv2.putText(flipped_image, "left spine "+ str(round(left_spine_alignment,3)), (10,160), cv2.FONT_HERSHEY_SIMPLEX,0.75,text_color, 1, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right spine "+ str(round(right_spine_alignment,3)), (10,200), cv2.FONT_HERSHEY_SIMPLEX,0.75,text_color, 1, cv2.LINE_AA)
    
 
 
