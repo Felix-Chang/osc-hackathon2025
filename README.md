@@ -39,10 +39,6 @@ pip install -r requirements.txt
 ```
 
 ### 4) Run (example)
-```bash
+```
 python getdata.py
-# or: python -m src.main
 =======
-```
-python getdata.py
-```
