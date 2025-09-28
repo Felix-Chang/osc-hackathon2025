@@ -1,10 +1,12 @@
 import cv2
-import time
+import time, turtle
 import mediapipe as mp
 import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
+board = turtle.Screen()
+pen = turtle.Turtle()
 
 # For webcam input:
 
@@ -24,23 +26,25 @@ class PausableStopwatch:
         if self.start_time is None:
             # First time starting
             self.start_time = time.monotonic()
-            print("Timer started.")
+            #print("Timer started.")
         elif self.is_paused:
             # Resuming from a paused state
             time_difference = time.monotonic() - self.paused_time
             self.start_time += time_difference
             self.is_paused = False
-            print("Timer resumed.")
+            #print("Timer resumed.")
         else:
-            print("Timer is already running.")
+            #print("Timer is already running.")
+            pass
 
     def pause(self):
         if self.start_time is not None and not self.is_paused:
             self.paused_time = time.monotonic()
             self.is_paused = True
-            print("Timer paused.")
+            #print("Timer paused.")
         else:
-            print("Timer is not running or is already paused.")
+            #print("Timer is not running or is already paused.")
+            pass
 
     def reset(self):
         self.start_time = None
@@ -104,7 +108,7 @@ with mp_pose.Pose(
         #head_slouching_right = right_ear.x > right_shoulder.x - SLOUCH_THRESHOLD
         left_neck_alignment = abs(left_ear.x - left_shoulder.x)
         right_neck_alignment = abs(right_ear.x - right_shoulder.x)
-
+        
         
         # Check 2: Spine straightness (shoulder to hip alignment)
         # Calculate the vertical alignment of spine
@@ -120,10 +124,10 @@ with mp_pose.Pose(
             spine_straightness > SPINE_STRAIGHTNESS_THRESHOLD or 
             shoulder_height_diff > 0.05):
             posture_status = 'Slouching Detected!'
-            text_color = (0, 0, 255) # Red for bad posture
+            text_color = (100, 100, 255) # Red for bad posture
         else:
             posture_status = 'Good Posture'
-            text_color = (0, 255, 0) # Green for good posture
+            text_color = (100, 255, 100) # Green for good posture
         
         # Text will be added to the flipped image later
         if posture_status == "Slouching Detected!":
@@ -154,10 +158,10 @@ with mp_pose.Pose(
                 cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
     # Testing purposes
 
-    #cv2.putText(flipped_image, "left neck "+ str(round(left_neck_alignment,3)), (10,80), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-   # cv2.putText(flipped_image, "right neck "+ str(round(right_neck_alignment,3)), (10,120), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-    #cv2.putText(flipped_image, "left spine "+ str(round(left_spine_alignment,3)), (10,160), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
-    #cv2.putText(flipped_image, "right spine "+ str(round(right_spine_alignment,3)), (10,200), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "left neck "+ str(round(left_neck_alignment,3)), (10,80), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right neck "+ str(round(right_neck_alignment,3)), (10,120), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "left spine "+ str(round(left_spine_alignment,3)), (10,160), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
+    cv2.putText(flipped_image, "right spine "+ str(round(right_spine_alignment,3)), (10,200), cv2.FONT_HERSHEY_SIMPLEX,1,text_color, 2, cv2.LINE_AA)
    
 
 
@@ -165,8 +169,13 @@ with mp_pose.Pose(
 
     if cv2.waitKey(5) & 0xFF == 27:
       break
-
-print(f"Score: {postureTimer.get_elapsed_time()/totalTimer.get_elapsed_time() * 100:.2f} out of 100")
-
+postureTimer.start()
+score = postureTimer.get_elapsed_time() / totalTimer.get_elapsed_time() * 100
+print(f"Score: {score:.2f} out of 100")
+pen.penup()
+pen.goto(0,0)
+pen.pendown()
+pen.write(f"Score: {score:.0f}/100", font=("Arial", 40, "normal"), align = "center")
 cap.release()
 cv2.destroyAllWindows() # Good practice to close the window properly
+board.mainloop()
